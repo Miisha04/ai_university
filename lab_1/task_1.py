@@ -12,7 +12,6 @@ start = 10
 end = 70
 arr = np.array(range(start, end))
 arr = arr.reshape((6,10))
-dlina_posl = 100_000_000
 
 result = arr[::2, ::3]
 
