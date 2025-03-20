@@ -35,31 +35,37 @@ def update_weights(X, y_true, y_pred, learning_rate):
 
 
 def main():
+    global weights, bias
 
-    X_train = np.array([[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7]])
-    y_train = np.array([linear_function(x1,x2,x3) for x1, x2, x3 in X_train])
+    num_experiments = 5  
+    epochs = np.random.randint(800, 1501)  
+    learning_rate = 0.01 
 
-    epochs = 1000
-    learning_rate = 0.01
-
-
-    for epoch in range(epochs):
-        y_pred = forward_pass(X_train)
-        loss = compute_loss(y_train, y_pred)
-
-        update_weights(X_train, y_train, y_pred, learning_rate)
-
-        if epoch % 100 == 0:
-            print(f'Epoch {epoch}, Loss: {loss:.8f}, weights {weights}, bias{bias}')
+    for exp in range(1, num_experiments + 1):
+        print(f"\n Эксперимент {exp}")
 
 
-    X_test = np.array([[7,8,9],[8,9,10]])
+        weights = np.random.rand(3)
+        bias = np.random.rand()
 
-    predictions = forward_pass(X_test)
+        X_train = np.random.randint(1, 10, size=(5, 3))
+        y_train = np.array([linear_function(x1, x2, x3) for x1, x2, x3 in X_train])
 
-    y_true = np.array([linear_function(x1,x2,x3) for x1,x2,x3 in X_test])
-    
-    print('Predictions:', predictions,'y_true:', y_true)
+        for epoch in range(epochs):
+            y_pred = forward_pass(X_train)
+            loss = compute_loss(y_train, y_pred)
+
+            update_weights(X_train, y_train, y_pred, learning_rate)
+
+            if epoch % 100 == 0:
+                print(f'Epoch {epoch}, Loss: {loss:.8f}')
+
+        X_test = np.random.randint(1, 10, size=(2, 3))
+        predictions = forward_pass(X_test)
+        y_true = np.array([linear_function(x1, x2, x3) for x1, x2, x3 in X_test])
+
+        print('Предсказания:', predictions)
+        print('Истинные значения:', y_true)
 
 
 
